@@ -1,12 +1,12 @@
 package com.saucedemo.utilities.base;
 
 import com.saucedemo.utilities.settings.ScenarioContext;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class SeleniumHelper {
     protected ScenarioContext context;
@@ -19,36 +19,66 @@ public class SeleniumHelper {
 
     public void goTo(String url) {
         driver.get(url);
+        driver.manage().window().maximize();
     }
 
     public WebElement findElement(By locator) {
         return driver.findElement(locator);
     }
 
+    public void fillField(By locator, String value) {
+        findElement(locator).sendKeys(value);
+    }
+
     public void clickElement(By locator) {
         findElement(locator).click();
     }
 
-    public void fillFormField(By locator, String value) {
-        findElement(locator).sendKeys(value);
+    public String grabTextFrom(By locator) {
+        return findElement(locator).getText();
     }
 
-    public boolean isTextPresent(String text) {
-        return driver.getPageSource().contains(text);
+    public boolean isTextPresent(By locator, String text, int timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        System.out.println("titulo -------> " + driver.getTitle());
+        try {
+            return wait.until(driver -> {
+                WebElement element = driver.findElement(locator);
+                System.out.println("element -------> " + element.getText());
+                return element.getText().contains(text);
+            });
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-   /* public static void waitForElement(WebDriver driver, By locator, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
-        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-    }*/
+    public void iSee(String text) {
+        if (!driver.getPageSource().contains(text)) {
+            throw new AssertionError("Text not found: " + text);
+        }
+    }
+
+    public void iSeeTitle(String expectedText, int timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        try {
+            wait.until(driver -> driver.getTitle().contains(expectedText));
+        } catch (TimeoutException e) {
+            String actualTitle = driver.getTitle();
+            throw new AssertionError("Page title does not match the expected. Expected: "
+                    + expectedText + ", Actual: " + actualTitle);
+        }
+    }
+
+//    public static void waitForElement(WebDriver driver, By locator, int timeoutInSeconds) {
+//        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+//        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+//    }
 
     public boolean isCurrentUrlContains(String partialUrl) {
         return driver.getCurrentUrl().contains(partialUrl);
     }
 
-    public String getTextFromElement(By locator) {
-        return findElement(locator).getText();
-    }
+
 
     public void selectOptionFromDropdown(By selectLocator, String optionText) {
         Select dropdown = new Select(findElement(selectLocator));

@@ -14,12 +14,6 @@ public class Hooks {
 
     @After
     public void afterScenario() {
-        try {
-            // Atraso de 10 segundos (10000 milissegundos)
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         scenarioContext.reset();
     }
 }
