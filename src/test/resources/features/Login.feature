@@ -1,15 +1,16 @@
 @Login
 Feature: User Authentication
 
+  Background:
+    Given the user is on the home page
+
   @Scen_01 @Regression
   Scenario: User logs in successfully
-    Given the user is on the home page
     When the user enters the "standard_user" and the "secret_sauce"
     Then the user should be successfully authenticated
 
   @Scen_02 @Regression
   Scenario Outline: Login with Invalid Credentials
-    Given the user is on the home page
     When the user enters the "<username>" and the "<password>"
     Then the user should see the error message "<error_message>"
 

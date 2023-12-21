@@ -1,16 +1,18 @@
 package com.saucedemo.steps;
 
 import com.saucedemo.actionwords.Home;
-import com.saucedemo.actionwords.Utils;
+import com.saucedemo.actionwords.Products;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class HomeStep {
     private Home home;
+    private Products products;
 
     public HomeStep() {
         home = new Home();
+        products = new Products();
     }
 
     @Given("the user is on the home page")
@@ -25,7 +27,7 @@ public class HomeStep {
 
     @Then("the user should be successfully authenticated")
     public void the_user_should_be_successfully_authenticated() {
-        home.validateProductScreenDisplayed();
+        products.validateProductScreenDisplayed();
     }
 
     @Then("the user should see the error message {string}")

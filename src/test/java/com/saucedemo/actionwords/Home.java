@@ -17,10 +17,6 @@ public class Home extends SeleniumHelper {
         clickElement(By.id("login-button"));
     }
 
-    public void validateProductScreenDisplayed() {
-        iSeeTitle("Swag Labs", 3);
-    }
-
     public void validateErrorMessage(String errorMessage) {
         Assert.assertEquals(errorMessage, grabTextFrom(By.cssSelector("h3[data-test='error']")));
     }

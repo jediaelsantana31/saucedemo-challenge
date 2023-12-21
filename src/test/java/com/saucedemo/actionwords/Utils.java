@@ -1,10 +1,20 @@
 package com.saucedemo.actionwords;
 
-import com.saucedemo.utilities.base.SeleniumHelper;
-import com.saucedemo.utilities.settings.ProjectSettings;
-import org.junit.Assert;
-import org.openqa.selenium.By;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-public class Utils extends SeleniumHelper {
+public class Utils {
+
+    public String readFile(String filePath) {
+        try {
+            byte[] encoded = Files.readAllBytes(Path.of(filePath));
+            return new String(encoded, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
