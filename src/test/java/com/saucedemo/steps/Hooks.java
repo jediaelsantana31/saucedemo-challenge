@@ -14,6 +14,12 @@ public class Hooks {
 
     @After
     public void afterScenario() {
+       /* try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+*/
         scenarioContext.reset();
     }
 }

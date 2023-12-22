@@ -3,6 +3,7 @@ package com.saucedemo.utilities.base;
 import com.saucedemo.utilities.settings.ScenarioContext;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -93,6 +94,11 @@ public class SeleniumHelper {
     public void pressKey(Keys key) {
         Actions actions = new Actions(driver);
         actions.sendKeys(key).build().perform();
+    }
+
+    public void waitForElementVisibility(By locator, int timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
 }

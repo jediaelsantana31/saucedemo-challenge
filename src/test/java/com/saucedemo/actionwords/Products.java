@@ -18,6 +18,24 @@ public class Products extends SeleniumHelper {
         iSeeTitle("Swag Labs", 3);
     }
 
+    public Products addsProductsToCart(List<String> productNames) {
+        List<WebElement> productList = findElements(By.cssSelector(".inventory_item"));
+
+        for (String productName : productNames) {
+            WebElement product = findProductByName(productList, productName);
+            if (product != null) {
+                clickAddToCartButton(product);
+            }
+        }
+
+        return this;
+    }
+
+    public ShoppingCart navigateToCart() {
+        clickElement(By.id("shopping_cart_container"));
+        return new ShoppingCart();
+    }
+
     public void validateProductInformation() {
         List<WebElement> productList = findElements(By.cssSelector(".inventory_item"));
 
@@ -61,6 +79,20 @@ public class Products extends SeleniumHelper {
             }
         }
         return Optional.empty();
+    }
+
+    private WebElement findProductByName(List<WebElement> productList, String productName) {
+        for (WebElement product : productList) {
+            String productNameScreen = product.findElement(By.cssSelector(".inventory_item_name")).getText();
+            if (productName.equals(productNameScreen)) {
+                return product;
+            }
+        }
+        return null;
+    }
+
+    private void clickAddToCartButton(WebElement product) {
+        product.findElement(By.xpath(".//button[contains(text(), 'Add to cart')]")).click();
     }
 
 }
