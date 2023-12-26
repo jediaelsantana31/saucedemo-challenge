@@ -1,11 +1,5 @@
 #!/bin/bash
-
-CHROME_VERSION=$(google-chrome --version | awk -F ' ' '{print $3}' | cut -d '.' -f 1)
-echo "Detected Chrome Version: $CHROME_VERSION"
-
-CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-echo "Latest ChromeDriver Version: $CHROMEDRIVER_VERSION"
-
-wget "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-unzip chromedriver_linux64.zip -d $HOME
-echo "PATH=$HOME:\$PATH" >> $GITHUB_ENV
+# https://www.linkedin.com/pulse/running-selenium-web-tests-github-actions-moataz-nabil/
+set -ex
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
