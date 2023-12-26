@@ -15,7 +15,7 @@ import java.util.Optional;
 public class Products extends SeleniumHelper {
 
     public void validateProductScreenDisplayed() {
-        iSeeTitle("Swag Labs", 3);
+        iSeeTitle("Products", 3);
     }
 
     public Products addsProductsToCart(List<String> productNames) {

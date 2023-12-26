@@ -10,7 +10,7 @@ import static io.cucumber.junit.CucumberOptions.SnippetType.CAMELCASE;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "com.saucedemo.steps",
-        tags = "@Scen_07",
+        tags = "@Scen_01",
         plugin = {"pretty", "html:target/cucumber-reports", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
         snippets = CAMELCASE
 )
