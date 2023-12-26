@@ -20,9 +20,12 @@ jobs:
 
       - name: Setup ChromeDriver
         run: |
-          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f 1)
+          CHROME_VERSION=$(google-chrome --version | awk -F ' ' '{print $3}' | cut -d '.' -f 1)
+          echo "Detected Chrome Version: $CHROME_VERSION"
+          
           CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          echo  CHROMEDRIVER_VERSION
+          echo "Latest ChromeDriver Version: $CHROMEDRIVER_VERSION"
+          
           curl -O "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip -d $HOME
           echo "PATH=$HOME:\$PATH" >> $GITHUB_ENV
