@@ -11,10 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: browser-actions/setup-chrome@latest
-      - run: ls -R src/test/resources/
-
-
       - uses: actions/checkout@v3
       - name: Set up JDK 21
         uses: actions/setup-java@v3
@@ -27,10 +23,7 @@ jobs:
       - run: chrome --version
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
-      - name: Build with Maven
-        run: mvn test -D"cucumber.filter.tags=@Scen_01"
+        run: mvn test -DheadlessMode=true -D"cucumber.filter.tags=@Scen_01"
 
       - uses: actions/upload-artifact@master
         with:
