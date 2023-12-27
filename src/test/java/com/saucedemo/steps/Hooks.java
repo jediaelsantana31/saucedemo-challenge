@@ -10,7 +10,7 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
+//import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 public class Hooks {
     private final ScenarioContext scenarioContext = ScenarioContext.getInstance();
@@ -24,12 +24,12 @@ public class Hooks {
 
     public void configureReport() {
         Capabilities capabilities = scenarioContext.printBrowserInfo();
-        allureEnvironmentWriter(
+        /*allureEnvironmentWriter(
                 ImmutableMap.<String, String>builder()
                         .put("Browser", capabilities.getBrowserName())
                         .put("Browser.Version", capabilities.getBrowserVersion())
                         .put("URL", ProjectSettings.URL).build(),
-                System.getProperty("user.dir") + "/allure-results/");
+                System.getProperty("user.dir") + "/allure-results/");*/
     }
 
     @After

@@ -6,7 +6,7 @@ Feature: User Authentication
 
   @Scen_01 @Regression
   Scenario: User logs in successfully
-    When the user enters the "standard_user2" and the "secret_sauce"
+    When the user enters the "standard_user" and the "secret_sauce"
     Then the user should be successfully authenticated
 
   @Scen_02 @Regression
