@@ -12,7 +12,8 @@ jobs:
 
     steps:
       - uses: browser-actions/setup-chrome@latest
-      - run: ls src/test/resources/
+      - run: ls -R src/test/resources/
+
 
       - uses: actions/checkout@v3
       - name: Set up JDK 21
