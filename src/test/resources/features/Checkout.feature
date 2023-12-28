@@ -11,3 +11,4 @@ Feature: Test Checkout Flow
   Scenario: Verify Order Information During Checkout
     When the user proceeds to checkout
     Then the user should view the order information
+    And the final message should be "Thank you for your order!"

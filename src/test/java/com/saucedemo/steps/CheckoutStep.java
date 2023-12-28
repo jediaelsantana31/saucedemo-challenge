@@ -4,6 +4,7 @@ import com.saucedemo.actionwords.Checkout;
 import com.saucedemo.actionwords.ShoppingCart;
 import com.saucedemo.utilities.base.BaseTest;
 import com.saucedemo.utilities.base.UserData;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -31,5 +32,10 @@ public class CheckoutStep extends BaseTest {
                 .validateCartItems(cartProducts)
                 .validatePaymentAndShippingInfo(userData.getCardNumber(), userData.getShippingInformation())
                 .validateTotalPrice();
+    }
+
+    @And("the final message should be {string}")
+    public void theFinalMessageShouldBe(String message) {
+        checkout.validateSuccessMessage(message);
     }
 }

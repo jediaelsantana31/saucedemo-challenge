@@ -41,20 +41,13 @@ public class SeleniumHelper {
     }
 
     public String grabTextFrom(By locator) {
-        return findElement(locator).getText();
-    }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
-    public boolean isTextPresent(By locator, String text, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-        System.out.println("titulo -------> " + driver.getTitle());
         try {
-            return wait.until(driver -> {
-                WebElement element = driver.findElement(locator);
-                System.out.println("element -------> " + element.getText());
-                return element.getText().contains(text);
-            });
-        } catch (Exception e) {
-            return false;
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return element.getText();
+        } catch (TimeoutException e) {
+            throw new NoSuchElementException("Timeout waiting for element to be visible: " + locator);
         }
     }
 
@@ -81,31 +74,6 @@ public class SeleniumHelper {
         } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
             return false;
         }
-    }
-
-//    public static void waitForElement(WebDriver driver, By locator, int timeoutInSeconds) {
-//        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
-//        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-//    }
-
-    public boolean isCurrentUrlContains(String partialUrl) {
-        return driver.getCurrentUrl().contains(partialUrl);
-    }
-
-
-    public void selectOptionFromDropdown(By selectLocator, String optionText) {
-        Select dropdown = new Select(findElement(selectLocator));
-        dropdown.selectByVisibleText(optionText);
-    }
-
-    public void pressKey(Keys key) {
-        Actions actions = new Actions(driver);
-        actions.sendKeys(key).build().perform();
-    }
-
-    public void waitForElementVisibility(By locator, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
 }

@@ -63,6 +63,14 @@ public class Checkout extends SeleniumHelper {
         return this;
     }
 
+    public Checkout validateSuccessMessage(String expectedMessage) {
+        clickElement(By.id("finish"));
+        iSee("Checkout: Complete!");
+        String actualSuccessMessage = grabTextFrom(By.cssSelector("h2.complete-header"));
+        Assert.assertEquals("Error completing the order - " + expectedMessage, expectedMessage, actualSuccessMessage);
+        return this;
+    }
+
     private void fillUserData(UserData userData) {
         fillField(By.id("first-name"), userData.getFirstName());
         fillField(By.id("last-name"), userData.getLastName());
