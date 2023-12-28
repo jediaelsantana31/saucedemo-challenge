@@ -71,6 +71,11 @@ public class ShoppingCart extends SeleniumHelper {
         return null;
     }
 
+    public void clickCheckoutButton() {
+        clickElement(By.id("checkout"));
+
+    }
+
     private void clickRemoveButton(WebElement cartItem) {
         cartItem.findElement(By.xpath(".//button[contains(text(), 'Remove')]")).click();
     }

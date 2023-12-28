@@ -75,6 +75,14 @@ public class SeleniumHelper {
         }
     }
 
+    public boolean isElementDisplayed(By by) {
+        try {
+            return findElement(by).isDisplayed();
+        } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
+            return false;
+        }
+    }
+
 //    public static void waitForElement(WebDriver driver, By locator, int timeoutInSeconds) {
 //        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
 //        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -83,7 +91,6 @@ public class SeleniumHelper {
     public boolean isCurrentUrlContains(String partialUrl) {
         return driver.getCurrentUrl().contains(partialUrl);
     }
-
 
 
     public void selectOptionFromDropdown(By selectLocator, String optionText) {

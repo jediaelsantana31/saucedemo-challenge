@@ -1,24 +1,35 @@
 package com.saucedemo.steps;
 
 import com.saucedemo.actionwords.Checkout;
+import com.saucedemo.actionwords.ShoppingCart;
+import com.saucedemo.utilities.base.BaseTest;
+import com.saucedemo.utilities.base.UserData;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class CheckoutStep {
+import java.util.List;
+
+public class CheckoutStep extends BaseTest {
     private Checkout checkout;
+    private UserData userData;
 
     public CheckoutStep() {
         checkout = new Checkout();
+        userData = new UserData();
     }
 
     @When("the user proceeds to checkout")
     public void theUserProceedsToCheckout() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        new ShoppingCart().clickCheckoutButton();
+        checkout.proceedToCheckout(userData);
     }
+
     @Then("the user should view the order information")
     public void theUserShouldViewTheOrderInformation() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        List<String> cartProducts = (List<String>) getVariable("cartProducts");
+        checkout.overviewIsDisplayed()
+                .validateCartItems(cartProducts)
+                .validatePaymentAndShippingInfo(userData.getCardNumber(), userData.getShippingInformation())
+                .validateTotalPrice();
     }
 }

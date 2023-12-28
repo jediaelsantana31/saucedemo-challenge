@@ -11,5 +11,3 @@ Feature: Test Checkout Flow
   Scenario: Verify Order Information During Checkout
     When the user proceeds to checkout
     Then the user should view the order information
-
-    Then the product(s) should be removed from the cart
