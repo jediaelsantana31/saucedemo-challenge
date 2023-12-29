@@ -58,3 +58,26 @@ Execute the Selenium tests using the following Maven command:
 
 ## Test Execution Workflow
 The project utilizes [GitHub Actions](https://github.com/jediaelsantana31/saucedemo-challenge/actions) for continuous integration. The workflow is defined in the `.github/workflows/selenium-test.yaml` file.
+
+--------------
+# Test Cases
+
+## TC001 - Login successfully
+
+**Description:** Check if the system allows login with valid credentials.
+
+**Preconditions:** User must have access to the system.
+
+**Status:** Done
+
+**Gherkin:**
+```gherkin
+Background:
+    Given the user is on the home page
+
+@TC001 @Regression
+Scenario: Login successfully
+    When the user enters the "standard_user" and the "secret_sauce"
+    Then the user should be successfully authenticated
+
+
