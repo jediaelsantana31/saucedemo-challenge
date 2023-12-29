@@ -1,0 +1,7 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"","User Authentication","Invalid login","0","0","4","0","0"
+"","Product list","Add product to cart","0","0","1","0","0"
+"","User Authentication","Login successfully","0","0","1","0","0"
+"","Cart","Remove product from cart","0","0","1","0","0"
+"","Test Checkout Flow","Verify Order Information During Checkout","0","0","1","0","0"
+"","Product list","Validate the product list","0","0","1","0","0"
