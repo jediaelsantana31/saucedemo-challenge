@@ -23,7 +23,7 @@ jobs:
       - run: chrome --version
 
       - name: Build with Maven
-        run: mvn test -DheadlessMode=true -D"cucumber.filter.tags=@Scen_01"
+        run: mvn test -DheadlessMode=true -D"cucumber.filter.tags=@Regression"
 
       - uses: actions/upload-artifact@master
         with:
