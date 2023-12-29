@@ -8,16 +8,17 @@ This project is dedicated to test automation for the SauceDemo application, leve
 
 Make sure you have the following tools installed before running the tests:
 
-- [Java](https://www.java.com/en/download/)
+- [Java -JDK21](https://www.oracle.com/br/java/technologies/downloads/)
 - [Maven](https://maven.apache.org/download.cgi)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Allure Report](https://allurereport.org/docs/gettingstarted-installation/)
 
 ## Setup
 
 1. Clone the repository:
 
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/jediaelsantana31/saucedemo-challenge.git
    
 2. Navigate to the project root:
    ```bash
@@ -32,6 +33,9 @@ Execute the Selenium tests using the following Maven command:
 
     1. Headless Mode: mvn test -DheadlessMode=true -D"cucumber.filter.tags=@tag"
 	2. Chromedriver: mvn test -DheadlessMode=false -D"cucumber.filter.tags=@tag"
+
+## Generate Report
+ 	allure serve
 ## Project Structure
 
         saucedemo-automation
@@ -52,5 +56,5 @@ Execute the Selenium tests using the following Maven command:
         │   └── chromedriver.exe
         └── pom.xml
 
-## Project Structure
-The project utilizes GitHub Actions for continuous integration. The workflow is defined in the .github/workflows/selenium-test.yaml file.
+## Test Execution Workflow
+The project utilizes [GitHub Actions](https://github.com/jediaelsantana31/saucedemo-challenge/actions) for continuous integration. The workflow is defined in the `.github/workflows/selenium-test.yaml` file.
