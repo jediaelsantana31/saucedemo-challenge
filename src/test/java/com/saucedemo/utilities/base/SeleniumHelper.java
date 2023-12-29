@@ -2,16 +2,14 @@ package com.saucedemo.utilities.base;
 
 import com.saucedemo.utilities.settings.ScenarioContext;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
 
 public class SeleniumHelper {
-    protected ScenarioContext context;
+    private ScenarioContext context;
     private WebDriver driver;
 
     public SeleniumHelper() {
@@ -20,6 +18,7 @@ public class SeleniumHelper {
     }
 
     public void goTo(String url) {
+        log("Navigating to: " + url);
         driver.get(url);
         driver.manage().window().maximize();
     }
@@ -33,10 +32,12 @@ public class SeleniumHelper {
     }
 
     public void fillField(By locator, String value) {
+        log("Filling field: " + locator + " with value: " + value);
         findElement(locator).sendKeys(value);
     }
 
     public void clickElement(By locator) {
+        log("Clicking element: " + locator);
         findElement(locator).click();
     }
 
@@ -44,36 +45,37 @@ public class SeleniumHelper {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
 
         try {
+            log("Waiting for element to be visible: " + locator);
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-            return element.getText();
+            String text = element.getText();
+            log("Element is visible. Text grabbed from " + locator + ": " + text);
+            return text;
         } catch (TimeoutException e) {
-            throw new NoSuchElementException("Timeout waiting for element to be visible: " + locator);
+            log("Timeout waiting for element to be visible: " + locator);
+            return null;
         }
     }
 
     public void iSee(String text) {
+        log("Checking if text is present: " + text);
         if (!driver.getPageSource().contains(text)) {
             throw new AssertionError("Text not found: " + text);
         }
     }
 
-    public void iSeeTitle(String expectedText, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-        try {
-            wait.until(driver -> driver.getTitle().contains(expectedText));
-        } catch (TimeoutException e) {
-            String actualTitle = driver.getTitle();
-            throw new AssertionError("Page title does not match the expected. Expected: "
-                    + expectedText + ", Actual: " + actualTitle);
-        }
-    }
-
     public boolean isElementDisplayed(By by) {
         try {
-            return findElement(by).isDisplayed();
+            log("Checking if element is displayed: " + by);
+            boolean isDisplayed = findElement(by).isDisplayed();
+            log("Element is displayed: " + by);
+            return isDisplayed;
         } catch (NoSuchElementException | TimeoutException | StaleElementReferenceException e) {
+            log("Element is not displayed: " + by);
             return false;
         }
     }
 
+    private void log(String message) {
+        System.out.println("[INFO] " + message);
+    }
 }

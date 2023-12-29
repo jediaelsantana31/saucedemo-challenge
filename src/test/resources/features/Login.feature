@@ -1,5 +1,6 @@
 @Login
 Feature: User Authentication
+  As a user i want login to sauce demo
 
   Background:
     Given the user is on the home page

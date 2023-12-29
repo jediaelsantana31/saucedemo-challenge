@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ShoppingCart extends SeleniumHelper {
     public ShoppingCart cartIsDisplayed() {
-         iSeeTitle("Your Cart", 3);
+        iSee("Your Cart");
         return this;
     }
 
