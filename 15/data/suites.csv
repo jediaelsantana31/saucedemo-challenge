@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Fri Dec 29 01:06:36 GMT 2023","Fri Dec 29 01:06:52 GMT 2023","16467","","User Authentication","","User logs in successfully","","User logs in successfully","  As a user i want login to sauce demo"
