@@ -16,7 +16,7 @@ public class ProductsStep extends BaseTest {
 
     @When("the user navigates to the products page")
     public void theUserNavigatesToTheProductsPage() {
-        products.validateProductScreenDisplayed();
+        products.productIsDisplayed();
     }
 
     @When("the user adds the following products to the cart:")

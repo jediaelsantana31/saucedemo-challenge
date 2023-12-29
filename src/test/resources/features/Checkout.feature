@@ -1,3 +1,4 @@
+@Checkout
 Feature: Test Checkout Flow
   As a user, I want to purchase products from Sauce Demo
 
@@ -8,7 +9,7 @@ Feature: Test Checkout Flow
       | Sauce Labs Fleece Jacket |
       | Sauce Labs Onesie        |
 
-  @Scen_07 @Regression @Smoke
+  @TC006 @Regression @Smoke
   Scenario: Verify Order Information During Checkout
     When the user proceeds to checkout
     Then the user should view the order information

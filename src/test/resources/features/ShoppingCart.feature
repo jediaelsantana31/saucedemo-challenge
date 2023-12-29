@@ -1,10 +1,12 @@
-Feature: User Authentication
+@Cart
+Feature: Cart
+  As a user, I want to add and remove products from the Cart
 
   Background:
     Given the user is on the home page
     When the user enters the "standard_user" and the "secret_sauce"
 
-  @Scen_05 @Regression
+  @TC005 @Regression
   Scenario: Remove product from cart
     When the user adds the following products to the cart:
       | Sauce Labs Backpack               |

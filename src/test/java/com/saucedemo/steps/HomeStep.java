@@ -6,7 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class HomeStep {
+public class HomeStep{
     private Home home;
     private Products products;
 
@@ -27,7 +27,7 @@ public class HomeStep {
 
     @Then("the user should be successfully authenticated")
     public void the_user_should_be_successfully_authenticated() {
-        products.validateProductScreenDisplayed();
+        products.productIsDisplayed();
     }
 
     @Then("the user should see the error message {string}")

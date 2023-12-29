@@ -75,7 +75,7 @@ public class SeleniumHelper {
         }
     }
 
-    private void log(String message) {
+    public void log(String message) {
         System.out.println("[INFO] " + message);
     }
 }

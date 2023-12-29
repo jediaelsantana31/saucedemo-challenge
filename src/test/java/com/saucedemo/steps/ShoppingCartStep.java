@@ -22,7 +22,7 @@ public class ShoppingCartStep extends BaseTest {
 
     @Then("the products should appear in the cart")
     public void theProductsShouldAppearInTheCart() {
-        List<String> productNames = (List<String>) getVariable("productsDeleted");
+        List<String> productNames = (List<String>) getVariable("cartProducts");
         shoppingCart.cartIsDisplayed().validateCartItems(productNames);
     }
 

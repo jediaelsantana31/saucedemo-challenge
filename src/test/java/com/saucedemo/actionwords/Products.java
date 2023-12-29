@@ -6,16 +6,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class Products extends SeleniumHelper {
 
-    public void validateProductScreenDisplayed() {
+    public Products productIsDisplayed() {
         iSee("Products");
+        return this;
     }
 
     public Products addsProductsToCart(List<String> productNames) {
@@ -36,29 +39,33 @@ public class Products extends SeleniumHelper {
         return new ShoppingCart();
     }
 
-    public void validateProductInformation() {
+    public Products validateProductInformation() {
         List<WebElement> productList = findElements(By.cssSelector(".inventory_item"));
 
         for (WebElement product : productList) {
-            String productName = product.findElement(By.cssSelector(".inventory_item_name")).getText();
-            String productDescription = product.findElement(By.cssSelector(".inventory_item_desc")).getText();
-            String productPrice = product.findElement(By.cssSelector(".inventory_item_price")).getText();
-
-            Map<String, String> productInfoMap = getProductInformation(productName)
-                    .orElseThrow(() -> new RuntimeException("Product information not found for: " + productName));
-
-            Assert.assertEquals("Product name mismatch for: " + productName,
-                    productName, productInfoMap.get("productName"));
-            Assert.assertEquals("Product description mismatch for: " + productName,
-                    productDescription, productInfoMap.get("productDescription"));
-            Assert.assertEquals("Product price mismatch for: " + productName,
-                    productPrice, productInfoMap.get("productPrice"));
-
-            WebElement addToCartButton = product.findElement(By.xpath(
-                    ".//button[contains(text(), 'Add to cart')]"));
-            Assert.assertTrue("Add to cart button not displayed for: " + productName,
-                    addToCartButton.isDisplayed());
+            validateProductDetails(product);
+            validateAddToCartButton(product);
         }
+
+        return this;
+    }
+
+    private void validateProductDetails(WebElement product) {
+        String productName = getElementText(product, ".inventory_item_name");
+        String productDescription = getElementText(product, ".inventory_item_desc");
+        String productPrice = getElementText(product, ".inventory_item_price");
+
+        Map<String, String> productInfoMap = getProductInformation(productName)
+                .orElseThrow(() -> new RuntimeException("Product information not found for: " + productName));
+
+        assertEqual("Product name", productName, productInfoMap.get("productName"));
+        assertEqual("Product description", productDescription, productInfoMap.get("productDescription"));
+        assertEqual("Product price", productPrice, productInfoMap.get("productPrice"));
+    }
+
+    private void validateAddToCartButton(WebElement product) {
+        WebElement addToCartButton = product.findElement(By.xpath(".//button[contains(text(), 'Add to cart')]"));
+        assertTrue("Add to cart button not displayed", addToCartButton.isDisplayed());
     }
 
     private Optional<Map<String, String>> getProductInformation(String productNameToFilter) {
@@ -82,17 +89,34 @@ public class Products extends SeleniumHelper {
     }
 
     private WebElement findProductByName(List<WebElement> productList, String productName) {
-        for (WebElement product : productList) {
-            String productNameScreen = product.findElement(By.cssSelector(".inventory_item_name")).getText();
-            if (productName.equals(productNameScreen)) {
-                return product;
-            }
-        }
-        return null;
+        return productList.stream()
+                .filter(product -> getElementText(product, ".inventory_item_name").equals(productName))
+                .findFirst()
+                .orElse(null);
     }
 
     private void clickAddToCartButton(WebElement product) {
+        log("Clicking element: .//button[contains(text(), 'Add to cart')]");
         product.findElement(By.xpath(".//button[contains(text(), 'Add to cart')]")).click();
+    }
+
+    private void assertTrue(String message, boolean condition) {
+        Assert.assertTrue(message, condition);
+    }
+
+    private void assertEqual(String message, String expected, String actual) {
+        Assert.assertEquals(message, expected, actual);
+    }
+
+    private String getElementText(WebElement element, String cssSelector) {
+        try {
+            String text = element.findElement(By.cssSelector(cssSelector)).getText();
+            log("Successfully retrieved text using CSS selector '" + cssSelector + "': " + text);
+            return text;
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+            log("Error while retrieving text using CSS selector '" + cssSelector + "': " + e.getMessage());
+            throw e;
+        }
     }
 
 }

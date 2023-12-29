@@ -5,13 +5,13 @@ Feature: User Authentication
   Background:
     Given the user is on the home page
 
-  @Scen_01 @Regression
-  Scenario: User logs in successfully
+  @TC001 @Regression
+  Scenario: Login successfully
     When the user enters the "standard_user" and the "secret_sauce"
     Then the user should be successfully authenticated
 
-  @Scen_02 @Regression
-  Scenario Outline: Login with Invalid Credentials
+  @TC002 @Regression
+  Scenario Outline: Invalid login
     When the user enters the "<username>" and the "<password>"
     Then the user should see the error message "<error_message>"
 
