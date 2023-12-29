@@ -6,7 +6,7 @@ This project is dedicated to test automation for the SauceDemo application, leve
 
 ## System Functionality Map
 
-![System Functionality Map]([URL_do_Mapa_Mental](https://github.com/jediaelsantana31/saucedemo-challenge/blob/main/src/test/resources/mind%20map.png))
+![System Functionality Map](src/test/resources/mind%20map.png)
 
 ## Prerequisites
 
