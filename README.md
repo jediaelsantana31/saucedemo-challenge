@@ -1,9 +1,12 @@
 # SauceDemo Automation 
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/jediaelsantana31/saucedemo-challenge/Java%20CI%20with%20Maven%20-%20Swag%20Labs)
 
 ## Overview
 
 This project is dedicated to test automation for the SauceDemo application, leveraging Selenium WebDriver and Java technologies. The automated tests provide a robust and scalable solution for verifying the functionality and integrity of the SauceDemo application, ensuring a reliable and efficient testing process.
+
+## System Functionality Map
+
+![System Functionality Map]([URL_do_Mapa_Mental](https://github.com/jediaelsantana31/saucedemo-challenge/blob/main/src/test/resources/mind%20map.png))
 
 ## Prerequisites
 
