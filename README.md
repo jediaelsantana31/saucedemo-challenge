@@ -4,40 +4,53 @@
 
 This project performs test automation for the SauceDemo application using Selenium WebDriver and Java.
 
-## Project Structure
+## Prerequisites
 
-saucedemo-automation
-├── .github
-│   └── workflows
-│       └── selenium-test.yaml
-├── src
-│   └── test
-│       └── java
-│           └── com.saucedemo
-│               ├── actionwords
-│               ├── runner
-│               ├── steps
-│               └── utilities
-└── resources
-    ├── data
-    ├── features
-    └── chromedriver.exe
-└── pom.xml
+Make sure you have the following tools installed before running the tests:
 
+- [Java](https://www.java.com/en/download/)
+- [Maven](https://maven.apache.org/download.cgi)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-## Configuration
+## Setup
 
-Make sure you have the following tools installed:
+1. Clone the repository:
 
-- [Java](https://www.java.com/)
-- [Maven](https://maven.apache.org/)
-- [Chromedriver](https://sites.google.com/chromium.org/driver/)
+   ```bash
+   git clone <repository_url>
+   
+2. Navigate to the project root:
+   ```bash
+   cd saucedemo-automation
+
+3. Build the project using Maven:
+   ```bash
+   mvn clean install
 
 ## Running Tests
+Execute the Selenium tests using the following Maven command:
 
-### Step 1: Clone the Repository
+    1. Headless Mode: mvn test -DheadlessMode=true -D"cucumber.filter.tags=@tag"
+	2. Chromedriver: mvn test -DheadlessMode=false -D"cucumber.filter.tags=@tag"
+## Project Structure
 
-```bash
-git clone https://github.com/your-username/saucedemo-automation.git
-cd saucedemo-automation
+        saucedemo-automation
+        ├── .github
+        │   └── workflows
+        │       └── selenium-test.yaml
+        ├── src
+        │   └── test
+        │       └── java
+        │           └── com.saucedemo
+        │               ├── actionwords
+        │               ├── runner
+        │               ├── steps
+        │               └── utilities
+        └── resources
+        │   ├── data
+        │   ├── features
+        │   └── chromedriver.exe
+        └── pom.xml
 
+## Project Structure
+The project utilizes GitHub Actions for continuous integration. The workflow is defined in the .github/workflows/selenium-test.yaml file.
