@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project performs test automation for the SauceDemo application using Selenium WebDriver and Java.
+This project is dedicated to test automation for the SauceDemo application, leveraging Selenium WebDriver and Java technologies. The automated tests provide a robust and scalable solution for verifying the functionality and integrity of the SauceDemo application, ensuring a reliable and efficient testing process.
 
 ## Prerequisites
 
