@@ -72,12 +72,12 @@ The project utilizes [GitHub Actions](https://github.com/jediaelsantana31/sauced
 
 **Gherkin:**
 ```gherkin
-Background:
-    Given the user is on the home page
+	Background:
+	    Given the user is on the home page
 
-@TC001 @Regression
-Scenario: Login successfully
-    When the user enters the "standard_user" and the "secret_sauce"
-    Then the user should be successfully authenticated
+	@TC001 @Regression
+	Scenario: Login successfully
+	    When the user enters the "standard_user" and the "secret_sauce"
+	    Then the user should be successfully authenticated
 
-
+asd
